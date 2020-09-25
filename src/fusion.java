@@ -31,23 +31,23 @@ public class fusion {
 	
 	static void merge_sep(int [] tab , int l , int m , int r) {
 		
-		int tailleS1 = m;
+		int tailleS1 = m-l+1 ;
 		int tailleS2 = r - m;
 		
 		int [] S1 = new int [tailleS1];
 		int [] S2 = new int [tailleS2];
 		
 		for(int i=0; i<tailleS1 ; i++) {
-			S1[i] = tab[i];
+			S1[i] = tab[l+i];
 		}
 		
 		for(int i=0; i<tailleS2 ; i++) {
-			S2[i] = tab[m+i];
+			S2[i] = tab[m+1+i];
 		}
 		
 		int i=0 ; //indice de S1
 		int j=0 ; //indice de S2
-		int k=0; //indice de tab
+		int k=l; //indice de tab
 		
 		while(i<tailleS1 && j<tailleS2) {
 			if(S1[i]<= S2[j] ) {
@@ -92,7 +92,7 @@ public class fusion {
 			 if(tab[indL] < tab[indR]) {
 				 indL++;
 			 }else {
-				 for
+				 //for
 			 }
 			
 		 }
@@ -101,7 +101,7 @@ public class fusion {
 	static void sort (int [] tab , int l, int r) {
 		
 		if(l < r) {
-			int m = (l+r)/2;
+			int m = l + (r - l) / 2;
 			
 			sort(tab,l,m);
 			
@@ -124,7 +124,7 @@ public static void main(String[] args) {
 		System.out.println("before");
 		printTab(tab);
 		
-		sort(tab,1,50);
+		sort(tab,0,tab.length-1);
 		System.out.println("after");
 
 		printTab(tab);
