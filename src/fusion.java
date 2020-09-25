@@ -84,18 +84,48 @@ public class fusion {
 		
 	}
 	
-	void merge (int [] tab , int l , int m , int r) {
+	static void merge (int [] tab , int l , int m , int r) {
+		
 		 int indL = l;
 		 int indR = m+1;
 		 
-		 for(int i=l; i<m+1; i++) {
-			 if(tab[indL] < tab[indR]) {
-				 indL++;
-			 }else {
-				 //for
+		 int tailleS1 = m-l+1 ;
+		 int tailleS2 = r - m;
+		 
+		 for(int i=indL; i<indL+tailleS1; i++) {
+			 
+			  
+			 for(int j=indR+tailleS2-1 ; j>indR-1 ; j--) {
+				 
+				 if(tab[i] > tab[j]) {
+					 int tmp;
+					 tmp = tab[i];
+					 tab[i] = tab[j];
+					 tab[j] = tmp ;
+						 
+				 }
+				 
 			 }
+				 
+			 
 			
 		 }
+	}
+	
+	static void sort_sep (int [] tab , int l, int r) {
+		
+		if(l < r) {
+			int m = l + (r - l) / 2;
+			
+			sort_sep(tab,l,m);
+			
+			sort_sep(tab,m+1,r);
+			
+			merge_sep(tab,l,m,r);
+			
+		}else {
+			return;
+		}
 	}
 	
 	static void sort (int [] tab , int l, int r) {
@@ -107,7 +137,7 @@ public class fusion {
 			
 			sort(tab,m+1,r);
 			
-			merge_sep(tab,l,m,r);
+			merge(tab,l,m,r);
 			
 		}else {
 			return;
@@ -124,9 +154,14 @@ public static void main(String[] args) {
 		System.out.println("before");
 		printTab(tab);
 		
+		/*
+		sort_sep(tab,0,tab.length-1);
+		System.out.println("after");
+		printTab(tab);
+		*/
+		
 		sort(tab,0,tab.length-1);
 		System.out.println("after");
-
 		printTab(tab);
 
 		
