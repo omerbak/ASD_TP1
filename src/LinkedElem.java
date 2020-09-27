@@ -23,6 +23,13 @@ public class LinkedElem {
 		this.previous=null;
 	}
 	
+	public LinkedElem() {
+		
+		this.val = 0;
+		this.next = null;
+		this.previous=null;
+	}
+	
 	/*
 	 * @role: returns the value of the element
 	 */
@@ -60,6 +67,26 @@ public class LinkedElem {
 	public void setPrevious(LinkedElem elem) {
 		
 		this.previous = elem;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		
+		//if we are comparing the same object
+		if(this == obj) {
+			return true;
+		}
+		
+		if(!(obj instanceof LinkedElem)) {
+			return false;
+		}
+		
+		LinkedElem elem = (LinkedElem) obj;
+		if(this.get_val() == elem.get_val()) {
+			return true;
+		}
+		
+		return false;
 	}
 	
 

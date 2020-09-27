@@ -115,7 +115,7 @@ public class fusion {
 	static void sort_sep (int [] tab , int l, int r) {
 		
 		if(l < r) {
-			int m = l + (r - l) / 2;
+			int m = l + ((r - l) / 2);
 			
 			sort_sep(tab,l,m);
 			
