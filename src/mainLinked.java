@@ -41,6 +41,63 @@ public class mainLinked {
 		 }
 	}
 	
+	public static void merge_sep(LinkedList list, int l, int m, int r) {
+		
+		int tailleS1 = m-l+1 ;
+		int tailleS2 = r - m;
+		
+		LinkedList S1 = new LinkedList();
+		LinkedList S2 = new LinkedList();
+		
+		for(int i=0; i<tailleS1; i++) {
+			S1.addElemTail(list.get_elem(l+i));
+			
+		}
+		
+		for(int i=0; i<tailleS2; i++) {
+			S2.addElemTail(list.get_elem(m+1+i));
+		}
+		
+		int i=0 ; //indice de S1
+		int j=0 ; //indice de S2
+		int k=l; //indice de tab
+		
+		while(i<tailleS1 && j<tailleS2) {
+			
+			int valS1 = S1.get_elem(i).get_val();
+			int valS2 = S2.get_elem(j).get_val();
+			
+			if(valS1 <= valS2) {
+				list.get_elem(k).changeVal(valS1);
+				i++;
+				k++;
+			}else {
+				list.get_elem(k).changeVal(valS2);
+				j++;
+				k++;
+			}
+			
+		}
+		
+		while(i<tailleS1) {
+			int valS1 = S1.get_elem(i).get_val();
+			list.get_elem(k).changeVal(valS1);
+			i++;
+			k++;
+			
+		}
+		
+		while(j<tailleS2) {
+			
+			int valS2 = S2.get_elem(j).get_val();
+			list.get_elem(k).changeVal(valS2);
+			j++;
+			k++;
+			
+		}
+		
+	}
+	
 	public static void sort(LinkedList list, int l, int r) {
 		
 		if( l < r) {
@@ -51,12 +108,22 @@ public class mainLinked {
 			
 		}
 	}
+	
+	public static void sort_sep(LinkedList list , int l , int r) {
+		if(l < r) {
+			
+			int m = l + (r - l) / 2;
+			sort_sep(list, l, m);
+			sort_sep(list, m+1, r);
+			merge_sep(list, l, m, r);
+		}
+	}
 
 	public static void main(String[] args) {
 		
 		System.out.println("testing the constructor that creat a list with random values");
 		
-		LinkedList list = new LinkedList(10);
+		LinkedList list = new LinkedList(4);
 		printLinkedList(list);
 		
 		/*
@@ -95,9 +162,14 @@ public class mainLinked {
 		*/
 		
 		
-		
+		/*
 		System.out.println("test sort without a copy");
 		sort(list, 0, 9);
+		printLinkedList(list);
+		*/
+		
+		System.out.println("test sort with copying");
+		sort_sep(list, 0, list.get_size()-1);
 		printLinkedList(list);
 		
 		
